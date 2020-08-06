@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Share your travel tips and get inspired by your friends ",
+    "githubUrl": "https://github.com/StephBerg86/TravelFriends"
   }
 }
