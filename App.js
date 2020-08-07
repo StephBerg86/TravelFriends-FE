@@ -4,28 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import AppButton from "./app/components/AppButton";
 import Card from "./app/components/Card";
+import TipDetailScreen from "./app/screens/TipDetailScreen";
+import UserItem from "./app/components/UserItem";
 
 export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Card
-        title="TravelTip1"
-        description="I've been to Thailand and you should do this and also this and this and so on"
-        image={require("./app/assets/testImage.jpg")}
-      />
-
-      <Card
-        title="TravelTip2"
-        description="I've been to Thailand and you should do this and also this and this and so on"
-        image={require("./app/assets/testImage.jpg")}
-      />
-    </View>
+    <TipDetailScreen />
     //<WelcomeScreen />
   );
 }
