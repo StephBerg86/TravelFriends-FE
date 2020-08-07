@@ -5,6 +5,7 @@ import {
   useFonts,
   LobsterTwo_400Regular,
 } from "@expo-google-fonts/lobster-two";
+import AppButton from "../components/AppButton";
 
 function WelcomeScreen(props) {
   let [fontsLoaded] = useFonts({ LobsterTwo_400Regular });
@@ -14,6 +15,7 @@ function WelcomeScreen(props) {
   }
   return (
     <ImageBackground
+      blurRadius={5}
       style={styles.background}
       source={require("../assets/background.jpg")}
     >
@@ -21,8 +23,10 @@ function WelcomeScreen(props) {
       <Text style={styles.slogan}>
         Share your travel tips and get inspired by your friends
       </Text>
-      <View style={styles.registerButton}></View>
-      <View style={styles.loginButton}></View>
+      <View style={styles.buttonsContainer}>
+        <AppButton title="Register" color="#009973" />
+        <AppButton title="Login" color="#d8335a" />
+      </View>
     </ImageBackground>
   );
 }
@@ -32,15 +36,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
-  registerButton: {
+  buttonsContainer: {
+    padding: 20,
     width: "100%",
-    height: 70,
-    backgroundColor: "#009973",
-  },
-  loginButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: "#ffffff",
   },
   logo: {
     width: 100,
