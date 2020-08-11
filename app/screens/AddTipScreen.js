@@ -25,12 +25,14 @@ function AddTipScreen(props) {
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Title of the tip"
+        maxLength={60}
         onChangeText={(text) => setTitle(text)}
       />
       <AppInput
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Description tip"
+        maxLength={200}
         onChangeText={(text) => setDescription(text)}
       />
       <ChooseCategory

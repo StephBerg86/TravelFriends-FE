@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, SafeAreaView } from "react-native";
-import Screen from "./app/components/Screen";
-import AppInput from "./app/components/AppInput";
-import ChooseCategory from "./app/components/ChooseCategory";
-import LoginScreen from "./app/screens/LoginScreen";
-import AppButton from "./app/components/AppButton";
+import React, { useEffect, useState } from "react";
 import AddTipScreen from "./app/screens/AddTipScreen";
-import TipDetailScreen from "./app/screens/TipDetailScreen";
+import SelectImage from "./app/components/SelectImage";
 
 export default function App() {
-  return (
-    <>
-      <AddTipScreen />
-    </>
-  );
+  return <SelectImage />;
 }
