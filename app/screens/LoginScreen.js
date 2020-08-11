@@ -3,7 +3,6 @@ import { StyleSheet, Image } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
-import App from "../../App";
 
 function LoginScreen(props) {
   const [email, setEmail] = useState();

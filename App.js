@@ -5,11 +5,13 @@ import AppInput from "./app/components/AppInput";
 import ChooseCategory from "./app/components/ChooseCategory";
 import LoginScreen from "./app/screens/LoginScreen";
 import AppButton from "./app/components/AppButton";
+import AddTipScreen from "./app/screens/AddTipScreen";
+import TipDetailScreen from "./app/screens/TipDetailScreen";
 
 export default function App() {
   return (
     <>
-      <LoginScreen />
+      <AddTipScreen />
     </>
   );
 }
