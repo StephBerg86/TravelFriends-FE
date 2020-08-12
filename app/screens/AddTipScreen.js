@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Image, Text } from "react-native";
+import { StyleSheet, Image, Text, View } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import ChooseCategory from "../components/ChooseCategory";
+import ImageInputList from "../components/AddTipForm/ImageInputList";
 
 const categories = [
   { label: "To do", value: 1 },
@@ -16,6 +17,16 @@ function AddTipScreen(props) {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState();
+
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
+
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
 
   return (
     <Screen style={styles.container}>
@@ -42,10 +53,13 @@ function AddTipScreen(props) {
         icon="apps"
         placeholder="Category"
       />
-      <AppInput
-        placeholder="Here comes image"
-        onChange={(pic) => setImage(pic)}
+
+      <ImageInputList
+        imageUris={imageUris}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
       />
+
       <AppButton
         title="Submit"
         onPress={() => console.log(title, description, category)}
