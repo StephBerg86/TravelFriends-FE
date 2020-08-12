@@ -15,7 +15,7 @@ function WelcomeScreen({ navigation }) {
   }
   return (
     <ImageBackground
-      blurRadius={5}
+      blurRadius={1}
       style={styles.background}
       source={require("../assets/background.jpg")}
     >
