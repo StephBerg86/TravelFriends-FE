@@ -7,7 +7,7 @@ import {
 } from "@expo-google-fonts/lobster-two";
 import AppButton from "../components/AppButton";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   let [fontsLoaded] = useFonts({ LobsterTwo_400Regular });
 
   if (!fontsLoaded) {
@@ -24,8 +24,16 @@ function WelcomeScreen(props) {
         Share your travel tips and get inspired by your friends
       </Text>
       <View style={styles.buttonsContainer}>
-        <AppButton title="Register" color="#009973" />
-        <AppButton title="Login" color="#d8335a" />
+        <AppButton
+          title="Sign up"
+          color="#009973"
+          onPress={() => navigation.navigate("Signup")}
+        />
+        <AppButton
+          title="Login"
+          color="#d8335a"
+          onPress={() => navigation.navigate("Login")}
+        />
       </View>
     </ImageBackground>
   );
