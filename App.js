@@ -1,6 +1,9 @@
 import React from "react";
-import AddTipScreen from "./app/screens/AddTipScreen";
+import { Text } from "react-native";
+
+import Screen from "./app/components/Screen";
+import SignupScreen from "./app/screens/SignupScreen";
 
 export default function App() {
-  return <AddTipScreen />;
+  return <SignupScreen />;
 }
