@@ -1,28 +1,16 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, SafeAreaView } from "react-native";
-import Screen from "./app/components/Screen";
-import AppInput from "./app/components/AppInput";
-import ChooseCategory from "./app/components/ChooseCategory";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import HomeScreen from "./app/screens/HomeScreen";
+import AccountScreen from "./app/screens/AccountScreen";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 export default function App() {
-  const categories = [
-    { label: "To do", value: 1 },
-    { label: "To stay", value: 2 },
-    { label: "To eat", value: 3 },
-  ];
-
-  const [category, setCategory] = useState(categories[0]);
-
   return (
-    <Screen>
-      <ChooseCategory
-        selectedItem={category}
-        onSelectItem={(item) => setCategory(item)}
-        items={categories}
-        icon="apps"
-        placeholder="Category"
-      />
-      <AppInput icon="email" placeholder="email" />
-    </Screen>
+    <NavigationContainer theme={navigationTheme}>
+      {/* <AuthNavigator /> */}
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
