@@ -2,22 +2,20 @@ import React from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
 import UserItem from "../components/UserItem";
 
-function TipDetailScreen(props) {
+function TipDetailScreen({ route }) {
+  const tip = route.params;
+
   return (
     <View>
-      <Image style={styles.image} source={require("../assets/testImage.jpg")} />
+      <Image style={styles.image} source={tip.image} />
       <UserItem
         image={require("../assets/profilPicTest.jpeg")}
         title="Stephanie Bergman"
         description="5 tips"
       />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>Travel tip 1</Text>
-        <Text style={styles.description}>
-          This is the description of the tip. It is about travelling to Asia and
-          all the places where you need to go to eat, sleep or what things you
-          should do.{" "}
-        </Text>
+        <Text style={styles.title}>{tip.title}</Text>
+        <Text style={styles.description}>{tip.description}</Text>
       </View>
     </View>
   );
