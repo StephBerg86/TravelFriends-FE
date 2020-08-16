@@ -30,7 +30,7 @@ function ChooseCategory({
             <MaterialCommunityIcons name={icon} size={20} style={styles.icon} />
           )}
           <Text style={styles.textInput}>
-            {selectedItem ? selectedItem.label : placeholder}
+            {selectedItem ? selectedItem.name : placeholder}
           </Text>
           <MaterialCommunityIcons
             name="chevron-down"
@@ -44,10 +44,10 @@ function ChooseCategory({
           <Button title="close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
-            keyExtractor={(item) => item.value.toString()}
+            keyExtractor={(item) => item.name}
             renderItem={({ item }) => (
               <Picker
-                label={item.label}
+                label={item.name}
                 onPress={() => {
                   setModalVisible(false), onSelectItem(item);
                 }}

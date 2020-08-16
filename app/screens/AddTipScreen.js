@@ -1,24 +1,35 @@
-import React, { useState } from "react";
-import { StyleSheet, Image, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Image, Text } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import ChooseCategory from "../components/ChooseCategory";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
+import traveltipApi from "../api/traveltips";
+import axios from "axios";
 
 const categories = [
-  { label: "To do", value: 1 },
-  { label: "To eat", value: 2 },
-  { label: "To stay", value: 3 },
+  { label: "To do", name: "To do" },
+  { label: "To eat", name: "To eat" },
+  { label: "To stay", name: "To stay" },
 ];
 
 function AddTipScreen(props) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState();
-
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+  const [category, setCategory] = useState();
+  const [country, setCountry] = useState();
   const [imageUris, setImageUris] = useState([]);
+  const [countries, setCountries] = useState();
+
+  useEffect(() => {
+    loadCountries();
+  }, []);
+
+  const loadCountries = async () => {
+    const response = await traveltipApi.getCountries();
+    setCountries(response.data.country);
+  };
 
   const handleAdd = (uri) => {
     setImageUris([...imageUris, uri]);
@@ -26,6 +37,29 @@ function AddTipScreen(props) {
 
   const handleRemove = (uri) => {
     setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
+
+  const handleSubmit = (title, description, category, country) => {
+    let body = {
+      title: title,
+      description: description,
+      category: category.name,
+      countryId: country.id,
+    };
+
+    console.log(body);
+
+    axios({
+      method: "post",
+      url: "http://192.168.2.6:4000/traveltip",
+      data: body,
+    })
+      .then(function (response) {
+        console.log("resp", response);
+      })
+      .catch(function (error) {
+        console.log("err", error);
+      });
   };
 
   return (
@@ -53,7 +87,13 @@ function AddTipScreen(props) {
         icon="apps"
         placeholder="Category"
       />
-
+      <ChooseCategory
+        onSelectItem={(item) => setCountry(item)}
+        selectedItem={country}
+        items={countries}
+        icon="apps"
+        placeholder="Country"
+      />
       <ImageInputList
         imageUris={imageUris}
         onAddImage={handleAdd}
@@ -62,7 +102,7 @@ function AddTipScreen(props) {
 
       <AppButton
         title="Submit"
-        onPress={() => console.log(title, description, category)}
+        onPress={() => handleSubmit(title, description, category, country)}
       />
     </Screen>
   );
@@ -78,10 +118,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     alignSelf: "center",
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 20,
   },
 });
