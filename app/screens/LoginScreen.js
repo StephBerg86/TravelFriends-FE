@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Image } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
+import authApi from "../api/auth";
+import AuthContext from "../auth/context";
 
 function LoginScreen(props) {
+  const authContext = useContext(AuthContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const handleSubmit = async (email, password) => {
+    const response = await authApi.login(email, password);
+    const user = response.data;
+    console.log("user", user);
+    authContext.setUser(user);
+  };
 
   return (
     <Screen style={styles.container}>
@@ -29,7 +39,7 @@ function LoginScreen(props) {
         textContentType="password"
         onChangeText={(text) => setPassword(text)}
       />
-      <AppButton title="Login" onPress={() => console.log(email, password)} />
+      <AppButton title="Login" onPress={() => handleSubmit(email, password)} />
     </Screen>
   );
 }

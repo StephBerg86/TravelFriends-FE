@@ -15,8 +15,8 @@ const categories = [
 ];
 
 function AddTipScreen(props) {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+  const [title, setTitle] = useState(" ");
+  const [description, setDescription] = useState(" ");
   const [category, setCategory] = useState();
   const [country, setCountry] = useState();
   const [imageUris, setImageUris] = useState([]);
@@ -47,18 +47,23 @@ function AddTipScreen(props) {
       countryId: country.id,
     };
 
-    console.log(body);
-
     axios({
       method: "post",
       url: "http://192.168.2.6:4000/traveltip",
       data: body,
     })
       .then(function (response) {
-        console.log("resp", response);
+        console.log("res", response);
+        setTitle("");
+        setDescription("");
+        setCategory("");
+        setCountry("");
+        if (!response) alert("Could not upload your travel tip");
+        alert("Thank you for adding your travel tip!");
       })
+
       .catch(function (error) {
-        console.log("err", error);
+        console.log(error);
       });
   };
 
