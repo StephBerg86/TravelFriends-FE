@@ -13,8 +13,7 @@ export default function App() {
 
   const restoreToken = async () => {
     const token = await authStorage.getToken();
-    if (!token) return;
-    setUser(token.token);
+    if (token) setUser(user);
   };
 
   if (!isReady)

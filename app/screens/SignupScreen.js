@@ -4,11 +4,37 @@ import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
+import axios from "axios";
 
 function SignupScreen(props) {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const handleSubmit = (name, email, password) => {
+    let body = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    axios({
+      method: "post",
+      url: "http://192.168.2.6:4000/signup",
+      data: body,
+    })
+      .then(function (response) {
+        console.log("res", response);
+        setName("");
+        setEmail("");
+        setPassword("");
+        if (!response) alert("Sign up failed");
+        alert("Thank you for creating an account!");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <Screen style={styles.container}>
@@ -42,7 +68,7 @@ function SignupScreen(props) {
       <ImageInputList />
       <AppButton
         title="Sign up"
-        onPress={() => console.log(name, email, password)}
+        onPress={() => handleSubmit(name, email, password)}
       />
     </Screen>
   );

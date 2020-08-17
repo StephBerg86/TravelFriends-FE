@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Image, Text } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import Screen from "../components/Screen";
+import ErrorMessage from "../components/ErrorMessage";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import authApi from "../api/auth";
@@ -11,18 +12,23 @@ function LoginScreen(props) {
   const authContext = useContext(AuthContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const handleSubmit = async (email, password) => {
     const response = await authApi.login(email, password);
     const user = response.data;
-    if (user.token) return authContext.setUser(user);
-    else console.log("error");
+    if (user.token) return authContext.setUser(user) && setLoginFailed(false);
+    else setLoginFailed(true);
     authStorage.storeToken(user.token);
   };
 
   return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
+      <ErrorMessage
+        error="Invalid email and/or password."
+        visible={loginFailed}
+      />
       <AppInput
         autoCapitalize="none"
         autoCorrect={false}
