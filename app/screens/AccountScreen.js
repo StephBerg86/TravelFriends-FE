@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, Button } from "react-native";
 import UserItem from "../components/UserItem";
 import Screen from "../components/Screen";
 import authContext from "../auth/context";
@@ -21,6 +21,7 @@ function AccountScreen({ navigation }) {
   const handleLogOut = () => {
     setUser(null);
     authStorage.removeToken();
+    console.log("log", handleLogOut);
   };
 
   return (
@@ -39,7 +40,7 @@ function AccountScreen({ navigation }) {
           renderItem={({ item }) => <UserItem title={item.title} />}
         />
       </View>
-      <UserItem title="Log out" onPress={handleLogOut} />
+      <Button title="Log out" onPress={() => handleLogOut()} />
     </Screen>
   );
 }

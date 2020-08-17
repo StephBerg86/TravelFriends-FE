@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import AuthNavigator from "./app/navigation/AuthNavigator";
+import { AppLoading } from "expo";
 import navigationTheme from "./app/navigation/navigationTheme";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 import AppNavigator from "./app/navigation/AppNavigator";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
-import { AppLoading } from "expo";
+import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
 
-  const restoreToken = async () => {
+  const storeToken = async () => {
     const token = await authStorage.getToken();
-    if (token) setUser(user);
+    if (token) {
+      const user = jwtDecode(token);
+      return setUser(user);
+    }
   };
 
   if (!isReady)
     return (
-      <AppLoading startAsync={restoreToken} onFinish={() => setIsReady(true)} />
+      <AppLoading startAsync={storeToken} onFinish={() => setIsReady(true)} />
     );
 
   return (

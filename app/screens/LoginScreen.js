@@ -7,6 +7,7 @@ import AppButton from "../components/AppButton";
 import authApi from "../api/auth";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
+import jwtDecode from "jwt-decode";
 
 function LoginScreen(props) {
   const authContext = useContext(AuthContext);
@@ -16,10 +17,13 @@ function LoginScreen(props) {
 
   const handleSubmit = async (email, password) => {
     const response = await authApi.login(email, password);
-    const user = response.data;
-    if (user.token) return authContext.setUser(user) && setLoginFailed(false);
-    else setLoginFailed(true);
-    authStorage.storeToken(user.token);
+    const res = response.data;
+
+    if (res.token) {
+      const user = jwtDecode(res.token);
+      authStorage.storeToken(res.token);
+      return authContext.setUser(user) && setLoginFailed(false);
+    } else setLoginFailed(true);
   };
 
   return (

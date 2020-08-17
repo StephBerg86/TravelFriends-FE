@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Image } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+import authStorage from "../auth/storage";
+import AuthContext from "../auth/context";
 
 function SignupScreen(props) {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const authContext = useContext(AuthContext);
 
   const handleSubmit = (name, email, password) => {
     let body = {
@@ -30,6 +34,14 @@ function SignupScreen(props) {
         setPassword("");
         if (!response) alert("Sign up failed");
         alert("Thank you for creating an account!");
+
+        const res = response.data;
+
+        if (res.token) {
+          const user = jwtDecode(res.token);
+          authStorage.storeToken(res.token);
+          return authContext.setUser(user);
+        }
       })
       .catch(function (error) {
         console.log(error);
