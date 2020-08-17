@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, Text } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import authApi from "../api/auth";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
 
 function LoginScreen(props) {
   const authContext = useContext(AuthContext);
@@ -14,8 +15,9 @@ function LoginScreen(props) {
   const handleSubmit = async (email, password) => {
     const response = await authApi.login(email, password);
     const user = response.data;
-    console.log("user", user);
-    authContext.setUser(user);
+    if (user.token) return authContext.setUser(user);
+    else console.log("error");
+    authStorage.storeToken(user.token);
   };
 
   return (

@@ -24,15 +24,10 @@ function WelcomeScreen({ navigation }) {
         Share your travel tips and get inspired by your friends
       </Text>
       <View style={styles.buttonsContainer}>
+        <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
         <AppButton
           title="Sign up"
-          color="#009973"
           onPress={() => navigation.navigate("Signup")}
-        />
-        <AppButton
-          title="Login"
-          color="#d8335a"
-          onPress={() => navigation.navigate("Login")}
         />
       </View>
     </ImageBackground>
