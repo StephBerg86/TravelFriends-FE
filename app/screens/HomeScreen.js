@@ -25,7 +25,6 @@ function HomeScreen({ navigation }) {
     setError(false);
     setTips(response.data.tips.rows);
   };
-  console.log(tips);
 
   return (
     <Screen style={styles.screen}>

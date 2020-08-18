@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, FlatList, Button } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import UserItem from "../components/UserItem";
+import AppButton from "../components/AppButton";
 import Screen from "../components/Screen";
 import authContext from "../auth/context";
 import authStorage from "../auth/storage";
@@ -40,7 +41,9 @@ function AccountScreen({ navigation }) {
           renderItem={({ item }) => <UserItem title={item.title} />}
         />
       </View>
-      <Button title="Log out" onPress={() => handleLogOut()} />
+      <View style={styles.button}>
+        <AppButton title="Log out" onPress={() => handleLogOut()} />
+      </View>
     </Screen>
   );
 }
@@ -51,6 +54,9 @@ const styles = StyleSheet.create({
   },
   screen: {
     backgroundColor: "#ffffff",
+  },
+  button: {
+    margin: 40,
   },
 });
 

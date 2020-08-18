@@ -7,6 +7,7 @@ import ChooseCategory from "../components/ChooseCategory";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
 import traveltipApi from "../api/traveltips";
 import axios from "axios";
+import * as ImagePicker from "expo-image-picker";
 
 const categories = [
   { label: "To do", name: "To do" },
@@ -21,6 +22,7 @@ function AddTipScreen(props) {
   const [country, setCountry] = useState();
   const [imageUris, setImageUris] = useState([]);
   const [countries, setCountries] = useState();
+  const [image, setImage] = useState([]);
 
   useEffect(() => {
     loadCountries();
@@ -39,12 +41,28 @@ function AddTipScreen(props) {
     setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
   };
 
-  const handleSubmit = (title, description, category, country) => {
+  let data = {
+    file: imageUris,
+    upload_preset: "phoneImages",
+  };
+  fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+    method: "POST",
+  }).then(async (r) => {
+    let data = await r.json();
+    setImage(data.url);
+  });
+
+  const handleSubmit = (title, description, category, country, image) => {
     let body = {
       title: title,
       description: description,
       category: category.name,
       countryId: country.id,
+      image: image,
     };
 
     axios({
@@ -107,7 +125,9 @@ function AddTipScreen(props) {
 
       <AppButton
         title="Submit"
-        onPress={() => handleSubmit(title, description, category, country)}
+        onPress={() =>
+          handleSubmit(title, description, category, country, image)
+        }
       />
     </Screen>
   );

@@ -11,7 +11,7 @@ function TipDetailScreen({ route }) {
       <UserItem
         image={require("../assets/profilPicTest.jpeg")}
         title="Stephanie Bergman"
-        description="5 tips"
+        description="added 5 tips"
       />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{tip.title}</Text>
