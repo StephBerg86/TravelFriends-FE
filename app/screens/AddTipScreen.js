@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Image, Text } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
@@ -7,6 +7,8 @@ import ChooseCategory from "../components/ChooseCategory";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
 import traveltipApi from "../api/traveltips";
 import axios from "axios";
+import authContext from "../auth/context";
+import { set } from "react-native-reanimated";
 
 const categories = [
   { label: "To do", name: "To do" },
@@ -14,7 +16,7 @@ const categories = [
   { label: "To stay", name: "To stay" },
 ];
 
-function AddTipScreen(props) {
+function AddTipScreen({ navigation }) {
   const [title, setTitle] = useState(" ");
   const [description, setDescription] = useState(" ");
   const [category, setCategory] = useState();
@@ -22,6 +24,8 @@ function AddTipScreen(props) {
   const [imageUris, setImageUris] = useState([]);
   const [countries, setCountries] = useState();
   const [image, setImage] = useState([]);
+  const { user, setUser } = useContext(authContext);
+  console.log("jsdsjdhsjds user", user);
 
   useEffect(() => {
     loadCountries();
@@ -55,13 +59,21 @@ function AddTipScreen(props) {
     setImage(data.url);
   });
 
-  const handleSubmit = (title, description, category, country, image) => {
+  const handleSubmit = (
+    title,
+    description,
+    category,
+    country,
+    image,
+    userId
+  ) => {
     let body = {
       title: title,
       description: description,
       category: category.name,
       countryId: country.id,
       image: image,
+      userId: userId,
     };
 
     axios({
@@ -70,13 +82,15 @@ function AddTipScreen(props) {
       data: body,
     })
       .then(function (response) {
-        console.log("res", response);
-        setTitle("");
-        setDescription("");
-        setCategory("");
-        setCountry("");
-        if (!response) alert("Could not upload your travel tip");
-        alert("Thank you for adding your travel tip!");
+        if (!response) {
+          alert("Could not upload your travel tip");
+        } else {
+          setCategory();
+          setCountry();
+
+          alert("Thank you for adding your travel tip!");
+          return navigation.navigate("Travel tips");
+        }
       })
 
       .catch(function (error) {
@@ -125,7 +139,7 @@ function AddTipScreen(props) {
       <AppButton
         title="Submit"
         onPress={() =>
-          handleSubmit(title, description, category, country, image)
+          handleSubmit(title, description, category, country, image, user.id)
         }
       />
     </Screen>

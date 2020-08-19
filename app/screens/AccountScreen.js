@@ -1,28 +1,18 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import UserItem from "../components/UserItem";
 import AppButton from "../components/AppButton";
 import Screen from "../components/Screen";
 import authContext from "../auth/context";
 import authStorage from "../auth/storage";
 
-const menuItems = [
-  {
-    title: "My traveltips",
-    icon: {
-      name: "format-list-bulleted",
-      backgroundColor: "#f2f2f2",
-    },
-  },
-];
-
 function AccountScreen({ navigation }) {
   const { user, setUser } = useContext(authContext);
+  console.log("user", user);
 
   const handleLogOut = () => {
     setUser(null);
     authStorage.removeToken();
-    console.log("log", handleLogOut);
   };
 
   return (
@@ -31,16 +21,11 @@ function AccountScreen({ navigation }) {
         <UserItem
           title={user.name}
           description={user.email}
-          image={require("../assets/profilPicTest.jpeg")}
+          image={{ uri: user.image }}
         />
       </View>
-      <View style={styles.container}>
-        <FlatList
-          data={menuItems}
-          keyExtractor={(menuItem) => menuItem.title}
-          renderItem={({ item }) => <UserItem title={item.title} />}
-        />
-      </View>
+      <Text style={styles.text}>My traveltips:</Text>
+      <Text style={styles.text}>My friends:</Text>
       <View style={styles.button}>
         <AppButton title="Log out" onPress={() => handleLogOut()} />
       </View>
@@ -50,13 +35,21 @@ function AccountScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 40,
   },
   screen: {
     backgroundColor: "#ffffff",
   },
   button: {
     margin: 40,
+    marginTop: 190,
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: "400",
+    color: "#009973",
+
+    padding: 30,
   },
 });
 

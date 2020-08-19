@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, ActivityIndicator } from "react-native";
-import {
-  Container,
-  Content,
-  Header,
-  Item,
-  Input,
-  Icon,
-  Text,
-  List,
-} from "native-base";
+import { Container, Header, Item, Input, Icon, Text } from "native-base";
 
 import Card from "../components/Card";
 import traveltipApi from "../api/traveltips";
@@ -20,7 +11,7 @@ function HomeScreen({ navigation }) {
   const [tips, setTips] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState();
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
@@ -39,8 +30,14 @@ function HomeScreen({ navigation }) {
   };
 
   useEffect(() => {
-    const results = tips.filter((tip) => tip.country.name.includes(searchTerm));
-    setSearchResults(results);
+    if (!searchTerm) {
+      setSearchResults(tips);
+    } else {
+      const results = tips.filter((tip) =>
+        tip.country.name.includes(searchTerm)
+      );
+      setSearchResults(results);
+    }
   }, [searchTerm]);
 
   const handleChange = (event) => {
@@ -62,29 +59,26 @@ function HomeScreen({ navigation }) {
         <Item>
           <Icon name="ios-search" />
           <Input
-            placeholder="Search"
+            placeholder="Search tips by country"
             value={searchTerm}
             onChangeText={handleChange}
           />
         </Item>
       </Header>
       <ActivityIndicator animating={loading} size="large" />
-      <Content>
-        <List>
-          <FlatList
-            data={searchResults}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <Card
-                title={item.title}
-                description={item.description}
-                imageUrl={item.image}
-                onPress={() => navigation.navigate("Tip Detail Screen", item)}
-              />
-            )}
+
+      <FlatList
+        data={!searchTerm ? tips : searchResults}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <Card
+            title={item.title}
+            description={item.description}
+            imageUrl={item.image}
+            onPress={() => navigation.navigate("Tip Detail Screen", item)}
           />
-        </List>
-      </Content>
+        )}
+      />
     </Container>
   );
 }

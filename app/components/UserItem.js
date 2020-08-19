@@ -19,19 +19,19 @@ const styles = StyleSheet.create({
   image: {
     top: 10,
     left: 20,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 10,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginRight: 20,
   },
   title: {
-    top: 20,
+    top: 30,
     left: 15,
     fontWeight: "600",
-    fontSize: 16,
+    fontSize: 20,
   },
   description: {
-    top: 20,
+    top: 30,
     left: 15,
   },
 });

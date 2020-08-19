@@ -9,9 +9,9 @@ function TipDetailScreen({ route }) {
     <View>
       <Image style={styles.image} source={{ uri: tip.image }} />
       <UserItem
-        image={require("../assets/profilPicTest.jpeg")}
-        title="Stephanie Bergman"
-        description="added 5 tips"
+        image={{ uri: tip.user.image }}
+        title={tip.user.name}
+        description={tip.user.email}
       />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{tip.title}</Text>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 34,
     fontWeight: "500",
     color: "#009973",
   },

@@ -19,6 +19,7 @@ function LoginScreen(props) {
     const response = await authApi.login(email, password);
     const res = response.data;
 
+    console.log("sdfdsa res", res);
     if (res.token) {
       const user = jwtDecode(res.token);
       authStorage.storeToken(res.token);

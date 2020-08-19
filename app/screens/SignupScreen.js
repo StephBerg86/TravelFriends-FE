@@ -13,13 +13,40 @@ function SignupScreen(props) {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [imageUris, setImageUris] = useState([]);
+  const [image, setImage] = useState([]);
   const authContext = useContext(AuthContext);
 
-  const handleSubmit = (name, email, password) => {
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
+
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
+
+  let data = {
+    file: imageUris,
+    upload_preset: "phoneImages",
+  };
+  fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+    method: "POST",
+  }).then(async (r) => {
+    let data = await r.json();
+    setImage(data.url);
+  });
+  console.log("url?", data.url);
+
+  const handleSubmit = (name, email, password, image) => {
     let body = {
       name: name,
       email: email,
       password: password,
+      image: image,
     };
 
     axios({
@@ -33,7 +60,7 @@ function SignupScreen(props) {
         setEmail("");
         setPassword("");
         if (!response) alert("Sign up failed");
-        alert("Thank you for creating an account!");
+        alert("Account created. Welcome to TravelFriends!");
 
         const res = response.data;
 
@@ -77,10 +104,14 @@ function SignupScreen(props) {
         textContentType="password"
         onChangeText={(text) => setPassword(text)}
       />
-      <ImageInputList />
+      <ImageInputList
+        imageUris={imageUris}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
+      />
       <AppButton
         title="Sign up"
-        onPress={() => handleSubmit(name, email, password)}
+        onPress={() => handleSubmit(name, email, password, image)}
       />
     </Screen>
   );

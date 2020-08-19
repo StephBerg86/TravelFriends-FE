@@ -10,6 +10,7 @@ import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [user, setUser] = useState();
+  //const [user, setUser] = useState()
   const [isReady, setIsReady] = useState(false);
 
   const storeToken = async () => {
