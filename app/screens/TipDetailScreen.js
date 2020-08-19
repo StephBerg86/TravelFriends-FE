@@ -7,7 +7,7 @@ function TipDetailScreen({ route }) {
 
   return (
     <View>
-      <Image style={styles.image} uri={tip.image} />
+      <Image style={styles.image} source={{ uri: tip.image }} />
       <UserItem
         image={require("../assets/profilPicTest.jpeg")}
         title="Stephanie Bergman"

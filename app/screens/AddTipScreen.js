@@ -7,7 +7,6 @@ import ChooseCategory from "../components/ChooseCategory";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
 import traveltipApi from "../api/traveltips";
 import axios from "axios";
-import * as ImagePicker from "expo-image-picker";
 
 const categories = [
   { label: "To do", name: "To do" },
