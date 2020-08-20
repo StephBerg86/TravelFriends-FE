@@ -10,14 +10,15 @@ import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [user, setUser] = useState();
-  //const [user, setUser] = useState()
+  const [token, setToken] = useState();
   const [isReady, setIsReady] = useState(false);
 
   const storeToken = async () => {
     const token = await authStorage.getToken();
+    console.log("token", token);
     if (token) {
-      const user = jwtDecode(token);
-      return setUser(user);
+      const jwtToken = jwtDecode(token);
+      return setToken(jwtToken);
     }
   };
 
@@ -27,9 +28,9 @@ export default function App() {
     );
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
       <NavigationContainer theme={navigationTheme}>
-        {user ? <AppNavigator /> : <AuthNavigator />}
+        {token ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
   );

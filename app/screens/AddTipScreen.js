@@ -8,7 +8,6 @@ import ImageInputList from "../components/AddTipForm/ImageInputList";
 import traveltipApi from "../api/traveltips";
 import axios from "axios";
 import authContext from "../auth/context";
-import { set } from "react-native-reanimated";
 
 const categories = [
   { label: "To do", name: "To do" },
@@ -17,15 +16,14 @@ const categories = [
 ];
 
 function AddTipScreen({ navigation }) {
-  const [title, setTitle] = useState(" ");
-  const [description, setDescription] = useState(" ");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [category, setCategory] = useState();
   const [country, setCountry] = useState();
   const [imageUris, setImageUris] = useState([]);
   const [countries, setCountries] = useState();
   const [image, setImage] = useState([]);
   const { user, setUser } = useContext(authContext);
-  console.log("jsdsjdhsjds user", user);
 
   useEffect(() => {
     loadCountries();
@@ -87,7 +85,6 @@ function AddTipScreen({ navigation }) {
         } else {
           setCategory();
           setCountry();
-
           alert("Thank you for adding your travel tip!");
           return navigation.navigate("Travel tips");
         }

@@ -7,11 +7,10 @@ import authContext from "../auth/context";
 import authStorage from "../auth/storage";
 
 function AccountScreen({ navigation }) {
-  const { user, setUser } = useContext(authContext);
-  console.log("user", user);
+  const { token, setToken } = useContext(authContext);
 
   const handleLogOut = () => {
-    setUser(null);
+    setToken(null);
     authStorage.removeToken();
   };
 
@@ -19,9 +18,9 @@ function AccountScreen({ navigation }) {
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <UserItem
-          title={user.name}
-          description={user.email}
-          image={{ uri: user.image }}
+          title={token.name}
+          description={token.email}
+          image={{ uri: token.image }}
         />
       </View>
       <Text style={styles.text}>My traveltips:</Text>

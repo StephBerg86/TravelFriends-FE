@@ -18,12 +18,12 @@ function LoginScreen(props) {
   const handleSubmit = async (email, password) => {
     const response = await authApi.login(email, password);
     const res = response.data;
+    authContext.setUser(res);
 
-    console.log("sdfdsa res", res);
     if (res.token) {
-      const user = jwtDecode(res.token);
+      const token = jwtDecode(res.token);
       authStorage.storeToken(res.token);
-      return authContext.setUser(user) && setLoginFailed(false);
+      return authContext.setToken(token) && setLoginFailed(false);
     } else setLoginFailed(true);
   };
 

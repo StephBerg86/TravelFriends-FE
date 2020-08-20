@@ -11,7 +11,7 @@ function HomeScreen({ navigation }) {
   const [tips, setTips] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
@@ -30,15 +30,14 @@ function HomeScreen({ navigation }) {
   };
 
   useEffect(() => {
-    if (!searchTerm) {
-      setSearchResults(tips);
-    } else {
-      const results = tips.filter((tip) =>
-        tip.country.name.includes(searchTerm)
-      );
-      setSearchResults(results);
-    }
-  }, [searchTerm]);
+    const results = tips.filter(
+      (tip) => {
+        tip.country.name.includes(searchTerm);
+        setSearchResults(results);
+      },
+      [searchTerm]
+    );
+  });
 
   const handleChange = (event) => {
     console.log("event", event);
