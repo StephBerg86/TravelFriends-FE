@@ -8,11 +8,9 @@ On the other hand, if I go to a new country and I would like to have some tips m
 
 I want to be able to share my best travel experiences with my friends and search for their tips and that’s why I’ve created this app.
 
-# Video of the app
+# GIF of the app
 
-<figure class="video_container">
-  <iframe src="https://youtu.be/sv-SNY-uqjA" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/ezgif-4-72b3c603c905.gif" />
 
 # Description of the project
 
