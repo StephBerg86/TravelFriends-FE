@@ -38,6 +38,7 @@ The goal of this project is to practice everything that I've learned in the past
 # Essential links 🖇
 
 * [Wireframe](https://github.com/StephBerg86/TravelFriends-FE/blob/development/wireframe-app.png)
+* [Data Model] (https://github.com/StephBerg86/TravelFriends-BE/blob/development/TravelFriends.png)
 * [Project Board](https://github.com/users/StephBerg86/projects/1)
 * [Frontend Repository](https://github.com/StephBerg86/TravelFriends-FE)
 * [Backend Repository](https://github.com/StephBerg86/TravelFriends-BE)
