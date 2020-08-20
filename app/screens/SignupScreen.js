@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, Image } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
@@ -14,11 +14,12 @@ function SignupScreen(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [imageUris, setImageUris] = useState([]);
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState();
   const authContext = useContext(AuthContext);
 
   const handleAdd = (uri) => {
     setImageUris([...imageUris, uri]);
+    setImage(imageUris);
   };
 
   const handleRemove = (uri) => {
@@ -29,17 +30,28 @@ function SignupScreen(props) {
     file: imageUris,
     upload_preset: "phoneImages",
   };
-  fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
-    body: JSON.stringify(data),
-    headers: {
-      "content-type": "application/json",
-    },
-    method: "POST",
-  }).then(async (r) => {
-    let data = await r.json();
-    setImage(data.url);
-  });
-  console.log("url?", data.url);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
+      signal: signal,
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+      method: "POST",
+    }).then(async (r) => {
+      let data = await r.json();
+      setImage(data.url);
+    });
+    console.log("url?", image);
+
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [image]);
 
   const handleSubmit = (name, email, password, image) => {
     let body = {
@@ -56,18 +68,16 @@ function SignupScreen(props) {
     })
       .then(function (response) {
         console.log("res", response);
-        setName("");
-        setEmail("");
-        setPassword("");
         if (!response) alert("Sign up failed");
         alert("Account created. Welcome to TravelFriends!");
 
         const res = response.data;
+        authContext.setUser(res);
 
         if (res.token) {
-          const user = jwtDecode(res.token);
+          const jwtToken = jwtDecode(res.token);
           authStorage.storeToken(res.token);
-          return authContext.setUser(user);
+          return authContext.setToken(jwtToken);
         }
       })
       .catch(function (error) {

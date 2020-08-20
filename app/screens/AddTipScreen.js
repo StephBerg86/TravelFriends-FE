@@ -8,6 +8,7 @@ import ImageInputList from "../components/AddTipForm/ImageInputList";
 import traveltipApi from "../api/traveltips";
 import axios from "axios";
 import AuthContext from "../auth/context";
+import { CommonActions } from "@react-navigation/native";
 
 const categories = [
   { label: "To do", name: "To do" },
@@ -22,7 +23,7 @@ function AddTipScreen({ navigation }) {
   const [country, setCountry] = useState();
   const [imageUris, setImageUris] = useState([]);
   const [countries, setCountries] = useState();
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState();
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -42,20 +43,30 @@ function AddTipScreen({ navigation }) {
     setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
   };
 
-  let data = {
-    file: imageUris,
-    upload_preset: "phoneImages",
-  };
-  fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
-    body: JSON.stringify(data),
-    headers: {
-      "content-type": "application/json",
-    },
-    method: "POST",
-  }).then(async (r) => {
-    let data = await r.json();
-    setImage(data.url);
-  });
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    let data = {
+      file: imageUris,
+      upload_preset: "phoneImages",
+    };
+    fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
+      signal: signal,
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+      method: "POST",
+    }).then(async (r) => {
+      let data = await r.json();
+      setImage(data.url);
+    });
+    console.log("url?", image);
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [image]);
 
   const handleSubmit = (
     title,
@@ -83,10 +94,20 @@ function AddTipScreen({ navigation }) {
         if (!response) {
           alert("Could not upload your travel tip");
         } else {
-          setCategory();
+          setCategory([]);
           setCountry();
           alert("Thank you for adding your travel tip!");
-          return navigation.navigate("Travel tips");
+
+          return navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                {
+                  name: "Travel tips",
+                },
+              ],
+            })
+          );
         }
       })
 
@@ -142,7 +163,7 @@ function AddTipScreen({ navigation }) {
             category,
             country,
             image,
-            authContext.user.id
+            authContext.token.id
           )
         }
       />

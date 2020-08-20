@@ -15,7 +15,6 @@ export default function App() {
 
   const storeToken = async () => {
     const token = await authStorage.getToken();
-    console.log("token", token);
     if (token) {
       const jwtToken = jwtDecode(token);
       return setToken(jwtToken);
