@@ -1,4 +1,4 @@
-# The Project (TravelFriends❤️)
+## The Project (TravelFriends❤️)
 
 **TravelFriends❤️** is an individual portfolio project that I've made after 9 weeks of coding at Codaisseur.
 
@@ -8,36 +8,36 @@ On the other hand, if I go to a new country and I would like to have some tips m
 
 I want to be able to share my best travel experiences with my friends and search for their tips and that’s why I’ve created this app.
 
-# GIF of the app
+## GIF of the app ⚡️
 
-<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/ezgif-4-72b3c603c905.gif" />
+<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/ezgif-4-72b3c603c905.gif" width=200 />
 
-# Description of the project
+## Description of the project 🖌
 
-The project is a mobile app made using React Native.
+The project is a mobile app made using React Native. You can search for travel tips and share your own tips with your friends.
 
-# Goal of the project
+## Goal of the project 🥅
 
-The goal of this project is to practice everything I've learned in the past weeks at Codaisseur and also learn new technologies like React Native.
+The goal of this project is to practice everything that I've learned in the past weeks at Codaisseur and also to learn new technologies like React Native.
 
-**What I've learned:**
-How to use React Native to create a mobile app
-Run and debug React Native apps
-Work with the core components and APIs
-Build reusable components
-Apply beautiful styles to components
-Get input from the user
-Publish apps to Expo
-Write clean code
+**What I've learned:** 🤓
+* How to use React Native to create a mobile app
+* Run and debug React Native apps
+* Work with the core components and APIs
+* Build reusable components
+* Apply styles to components
+* Get input from the user
+* Publish apps to Expo
+* Write clean code
 
-# Starting the app
+# Starting the app 📲
 
-- The app is made with React-Native using Expo, so you need Expo to run the app of your phone or a simulator.
+- The app is made with React-Native using Expo, so you need Expo to run the app on your phone or a simulator.
 - The server at TravelFriends-BE should run in order to fetch the travel tips and the rest of the data displayed on the app.
 
-# Essential links
+# Essential links 🖇
 
-[Wireframe](https://github.com/StephBerg86/TravelFriends-FE/blob/development/wireframe-app.png)
-[Project Board](https://github.com/users/StephBerg86/projects/1)
-[Frontend Repository](https://github.com/StephBerg86/TravelFriends-FE)
-[Backend Repository](https://github.com/StephBerg86/TravelFriends-BE)
+* [Wireframe](https://github.com/StephBerg86/TravelFriends-FE/blob/development/wireframe-app.png)
+* [Project Board](https://github.com/users/StephBerg86/projects/1)
+* [Frontend Repository](https://github.com/StephBerg86/TravelFriends-FE)
+* [Backend Repository](https://github.com/StephBerg86/TravelFriends-BE)
