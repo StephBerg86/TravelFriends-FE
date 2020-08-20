@@ -7,7 +7,7 @@ import ChooseCategory from "../components/ChooseCategory";
 import ImageInputList from "../components/AddTipForm/ImageInputList";
 import traveltipApi from "../api/traveltips";
 import axios from "axios";
-import authContext from "../auth/context";
+import AuthContext from "../auth/context";
 
 const categories = [
   { label: "To do", name: "To do" },
@@ -23,7 +23,7 @@ function AddTipScreen({ navigation }) {
   const [imageUris, setImageUris] = useState([]);
   const [countries, setCountries] = useState();
   const [image, setImage] = useState([]);
-  const { user, setUser } = useContext(authContext);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     loadCountries();
@@ -136,7 +136,14 @@ function AddTipScreen({ navigation }) {
       <AppButton
         title="Submit"
         onPress={() =>
-          handleSubmit(title, description, category, country, image, user.id)
+          handleSubmit(
+            title,
+            description,
+            category,
+            country,
+            image,
+            authContext.user.id
+          )
         }
       />
     </Screen>

@@ -3,11 +3,11 @@ import { View, StyleSheet, Text } from "react-native";
 import UserItem from "../components/UserItem";
 import AppButton from "../components/AppButton";
 import Screen from "../components/Screen";
-import authContext from "../auth/context";
+import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
 
 function AccountScreen({ navigation }) {
-  const { token, setToken } = useContext(authContext);
+  const { token, setToken } = useContext(AuthContext);
 
   const handleLogOut = () => {
     setToken(null);

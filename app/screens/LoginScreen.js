@@ -23,7 +23,7 @@ function LoginScreen(props) {
     if (res.token) {
       const token = jwtDecode(res.token);
       authStorage.storeToken(res.token);
-      return authContext.setToken(token) && setLoginFailed(false);
+      authContext.setToken(token) && setLoginFailed(false);
     } else setLoginFailed(true);
   };
 
