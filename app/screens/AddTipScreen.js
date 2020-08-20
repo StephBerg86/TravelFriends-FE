@@ -43,47 +43,42 @@ function AddTipScreen({ navigation }) {
     setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
   };
 
-  useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
+  const uploadImage = async (imageUris) => {
     let data = {
       file: imageUris,
       upload_preset: "phoneImages",
     };
-    fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
-      signal: signal,
+    return fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
       body: JSON.stringify(data),
       headers: {
         "content-type": "application/json",
       },
       method: "POST",
     }).then(async (r) => {
-      let data = await r.json();
-      setImage(data.url);
+      return await r.json();
     });
-    console.log("url?", image);
-    return function cleanup() {
-      abortController.abort();
-    };
-  }, [image]);
+  };
 
-  const handleSubmit = (
+  const handleSubmit = async (
     title,
     description,
     category,
     country,
-    image,
+    imageUris,
     userId
   ) => {
+    const resImage = await uploadImage(imageUris);
+    console.log("res", resImage);
+
     let body = {
       title: title,
       description: description,
       category: category.name,
       countryId: country.id,
-      image: image,
+      image: resImage.url,
       userId: userId,
     };
+    console.log("body", body);
 
     axios({
       method: "post",
@@ -162,8 +157,8 @@ function AddTipScreen({ navigation }) {
             description,
             category,
             country,
-            image,
-            authContext.token.id
+            imageUris,
+            authContext.token.userId
           )
         }
       />
