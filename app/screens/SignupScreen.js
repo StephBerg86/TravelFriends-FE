@@ -84,7 +84,7 @@ function SignupScreen(props) {
         autoCapitalize="none"
         autoCorrect={false}
         icon="account"
-        keyboardType="default"
+        // keyboardType="phone-pad"
         placeholder="Name"
         onChangeText={(text) => setName(text)}
       />
@@ -92,7 +92,7 @@ function SignupScreen(props) {
         autoCapitalize="none"
         autoCorrect={false}
         icon="email"
-        keyboardType="email-address"
+        // keyboardType="email-address"
         placeholder="Email"
         textContentType="emailAddress"
         onChangeText={(text) => setEmail(text)}

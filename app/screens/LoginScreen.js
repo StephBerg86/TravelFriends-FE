@@ -47,6 +47,7 @@ function LoginScreen(props) {
         autoCapitalize="none"
         autoCorrect={false}
         icon="lock"
+        keyboardType="phone-pad"
         placeholder="Password"
         secureTextEntry={true}
         textContentType="password"

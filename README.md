@@ -1,51 +1,43 @@
-<h1 align="center">Hi 👋, I'm Stephanie</h1>
-<h3 align="center">A junior full stack developer from Amsterdam</h3>
+# The Project (TravelFriends❤️)
 
-- 🔭 I’m currently working on [TravelFriends](https://github.com/StephBerg86/TravelFriends-FE)
+**TravelFriends❤️** is an individual portfolio project that I've made after 9 weeks of coding at Codaisseur.
 
-- 🌱 I’m currently learning **React, React Native, Redux, Express**
+Travelling is my passion and that’s why a lot of people always ask me for travel tips when they go to a country where I've been. At the moment I don’t have a place where I store my travel tips so every time a friend asks me for a tip I have to try to remember what I did and where I went in that specific country.
 
-- 📫 How to reach me **info@stephaniebergman.nl**
+On the other hand, if I go to a new country and I would like to have some tips myself, I don’t always know who of my friends already went to this country and who could have some good tips to share.
 
-- ⚡ Fun fact **I love scuba diving, surfing and dancing**
+I want to be able to share my best travel experiences with my friends and search for their tips and that’s why I’ve created this app.
 
-<p align="left"><img src="https://devicons.github.io/devicon/devicon.git/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/photoshop/photoshop-plain.svg" alt="photoshop" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> <img src="https://reactnative.dev/img/header_logo.svg" alt="reactnative" width="40" height="40"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/></p><p align="center">
-<a href="https://linkedin.com/in/stephanie-bergman" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" alt="stephanie-bergman" height="30" width="30" /></a>
-<a href="https://instagram.com/stephberg86" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg" alt="stephberg86" height="30" width="30" /></a>
-</p>
+# Video of the app
 
-# The Project (TravelFriends)
-
-**TravelFriends** is an individual portfolio project I made after 9 weeks of coding at Codaisseur. The project is a mobile phone app ...
-
-The idea of making a mobile app ..
-
-...
+https://youtu.be/sv-SNY-uqjA
 
 # Description of the project
 
-The project is a mobile app made using React Native ....
+The project is a mobile app made using React Native.
 
-# Main features include:
+# Goal of the project
 
-s
+The goal of this project is to practice everything I've learned in the past weeks at Codaisseur and also learn new technologies like React Native.
+
+**What I've learned:**
+How to use React Native to create a mobile app
+Run and debug React Native apps
+Work with the core components and APIs
+Build reusable components
+Apply beautiful styles to components
+Get input from the user
+Publish apps to Expo
+Write clean code
 
 # Starting the app
 
-- The app is made with React-Native using expo ...
+- The app is made with React-Native using Expo, so you need Expo to run the app of your phone or a simulator.
 - The server at TravelFriends-BE should run in order to fetch the travel tips and the rest of the data displayed on the app.
-
-# This repository contains:
-
-a
 
 # Essential links
 
-[Wireframe](a)
-[Project Backlog Board](a)
-[Frontend Repository](a)
-[Backend Repository](a)
-
-# Gifs of app screens
-
-a
+[Wireframe](https://github.com/StephBerg86/TravelFriends-FE/blob/development/wireframe-app.png)
+[Project Board](https://github.com/users/StephBerg86/projects/1)
+[Frontend Repository](https://github.com/StephBerg86/TravelFriends-FE)
+[Backend Repository](https://github.com/StephBerg86/TravelFriends-BE)
