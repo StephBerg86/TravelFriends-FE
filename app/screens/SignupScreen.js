@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { StyleSheet, Image } from "react-native";
+import React, { useState, useContext } from "react";
+import { StyleSheet, Image, ActivityIndicator } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
@@ -14,51 +14,43 @@ function SignupScreen(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [imageUris, setImageUris] = useState([]);
-  const [image, setImage] = useState();
   const authContext = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const handleAdd = (uri) => {
     setImageUris([...imageUris, uri]);
-    setImage(imageUris);
   };
 
   const handleRemove = (uri) => {
     setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
   };
 
-  let data = {
-    file: imageUris,
-    upload_preset: "phoneImages",
-  };
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
-    fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
-      signal: signal,
+  const uploadImage = async (imageUris) => {
+    setLoading(true);
+    let data = {
+      file: imageUris,
+      upload_preset: "phoneImages",
+    };
+    return fetch("https://api.cloudinary.com/v1_1/travelfriends/upload", {
       body: JSON.stringify(data),
       headers: {
         "content-type": "application/json",
       },
       method: "POST",
     }).then(async (r) => {
-      let data = await r.json();
-      setImage(data.url);
+      setLoading(false);
+      return await r.json();
     });
-    console.log("url?", image);
+  };
 
-    return function cleanup() {
-      abortController.abort();
-    };
-  }, [image]);
+  const handleSubmit = async (name, email, password, imageUris) => {
+    const resImage = await uploadImage(imageUris);
 
-  const handleSubmit = (name, email, password, image) => {
     let body = {
       name: name,
       email: email,
       password: password,
-      image: image,
+      image: resImage.url,
     };
 
     axios({
@@ -121,8 +113,9 @@ function SignupScreen(props) {
       />
       <AppButton
         title="Sign up"
-        onPress={() => handleSubmit(name, email, password, image)}
+        onPress={() => handleSubmit(name, email, password, imageUris)}
       />
+      <ActivityIndicator animating={loading} size="large" color="#d8335a" />
     </Screen>
   );
 }

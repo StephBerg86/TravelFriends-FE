@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Image, Text } from "react-native";
+import { StyleSheet, Image, Text, ActivityIndicator } from "react-native";
 import Screen from "../components/Screen";
 import AppInput from "../components/AppInput";
 import AppButton from "../components/AppButton";
@@ -23,8 +23,8 @@ function AddTipScreen({ navigation }) {
   const [country, setCountry] = useState();
   const [imageUris, setImageUris] = useState([]);
   const [countries, setCountries] = useState();
-  const [image, setImage] = useState();
   const authContext = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadCountries();
@@ -44,6 +44,7 @@ function AddTipScreen({ navigation }) {
   };
 
   const uploadImage = async (imageUris) => {
+    setLoading(true);
     let data = {
       file: imageUris,
       upload_preset: "phoneImages",
@@ -55,6 +56,7 @@ function AddTipScreen({ navigation }) {
       },
       method: "POST",
     }).then(async (r) => {
+      setLoading(false);
       return await r.json();
     });
   };
@@ -114,6 +116,7 @@ function AddTipScreen({ navigation }) {
   return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
+      <ActivityIndicator animating={loading} size="large" color="#d8335a" />
       <Text style={styles.title}>Add a tip:</Text>
       <AppInput
         autoCapitalize="none"
