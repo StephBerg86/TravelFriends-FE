@@ -10,7 +10,9 @@ I want to be able to share my best travel experiences with my friends and search
 
 # Video of the app
 
-https://youtu.be/sv-SNY-uqjA
+<figure class="video_container">
+  <iframe src="https://youtu.be/sv-SNY-uqjA" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
 
 # Description of the project
 
