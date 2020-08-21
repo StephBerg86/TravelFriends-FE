@@ -10,10 +10,14 @@ I want to be able to share my best travel experiences with my friends and search
 
 ## GIF of the app ⚡️
 
-Whole app<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/ezgif-4-72b3c603c905.gif" width=200 />
-Add tip<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/AddTip%20-%20TravelFriends.gif" width=200 />
-Search <img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/Search%20-%20TravelFriends.gif" width=200 />
-Sign up <img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/SignUp%20-%20TravelFriends.gif" width=200 />
+Whole app
+<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/ezgif-4-72b3c603c905.gif" width=150 />
+Add tip
+<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/AddTip%20-%20TravelFriends.gif" width=150 />
+Search
+<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/Search%20-%20TravelFriends.gif" width=150 />
+Sign up
+<img src="https://github.com/StephBerg86/TravelFriends-FE/blob/development/SignUp%20-%20TravelFriends.gif" width=150 />
 
 ## Description of the project 🖌
 
