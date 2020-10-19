@@ -1,6 +1,6 @@
 ## The Project (TravelFriends❤️)
 
-**TravelFriends❤️** is an individual portfolio project that I've made after 9 weeks of coding at Codaisseur.
+**TravelFriends❤️** is an individual portfolio project that I've made after 7 weeks of coding at Codaisseur.
 
 Travelling is my passion and that’s why a lot of people always ask me for travel tips when they go to a country where I've been. At the moment I don’t have a place where I store my travel tips so every time a friend asks me for a tip I have to try to remember what I did and where I went in that specific country.
 
